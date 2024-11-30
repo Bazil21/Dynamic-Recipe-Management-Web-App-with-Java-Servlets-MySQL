@@ -13,7 +13,16 @@ A feature-rich web application for recipe management, built using **Java Servlet
 
 ---
 
+## **Technologies Used**
+- **Frontend**: HTML, CSS (Bootstrap 5), JavaScript
+- **Backend**: Java Servlets
+- **Database**: MySQL
+- **Libraries**: `org.json` for JSON handling, `JDBC` for database operations
+
+---
+
 ## **Project Structure**
+```plaintext
 ├── src
 │   ├── database
 │   │   └── DBConnection.java    # Handles database connection
@@ -31,31 +40,3 @@ A feature-rich web application for recipe management, built using **Java Servlet
 │   ├── logo.png                 # App logo
 ├── lib                          # External libraries (e.g., JSON, JDBC driver)
 ├── README.md                    # Project documentation
-
-
-Technologies Used
-Frontend: HTML, CSS (Bootstrap 5), JavaScript
-Backend: Java Servlets
-Database: MySQL
-Libraries: org.json for JSON handling, JDBC for database operations
-
-
-APIs and Endpoints
-Login: /api/user (POST)
-Register: /api/user (POST)
-Fetch Recipes: /api/recipes (GET)
-Fetch Recipes by Category: /api/recipes?category=<category> (GET)
-Submit Recipe: /api/recipes (POST)
-
-How to Run
-Clone this repository:
-bash
-Copy code
-git clone https://github.com/YourUsername/recipe-management-webapp.git
-Set up the MySQL database using the provided script (database.sql).
-Configure the database credentials in the DBConnection.java file.
-Compile and run the project using your favorite IDE or command line
-
-javac -cp "lib/*" -d out src/*.java src/servlets/*.java
-java -cp "out;lib/*" App
-Open http://localhost:8080 in your browser to interact with the app.
