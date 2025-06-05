@@ -1,0 +1,44 @@
+.navbar-nav .nav-item .nav-link {
+  color: #ededed;
+  padding: 10px 15px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+
+.navbar-nav .nav-item .nav-link:hover {
+  background-color: #a397a7; 
+  color: #333; 
+}
+
+
+.navbar-nav .nav-item .nav-link.active, 
+.navbar-nav .nav-item .nav-link:focus {
+  background-color: #d1dce6; 
+  color: #333;
+  outline: none;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+h1 {
+  color: #333;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.accordion-button {
+  background-color: #f8f9fa;
+  color: #333;
+  font-weight: bold;
+}

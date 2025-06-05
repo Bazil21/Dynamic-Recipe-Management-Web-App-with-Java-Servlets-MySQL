@@ -1,0 +1,72 @@
+.navbar {
+    padding: 20px;
+}
+  
+  .navbar-nav .nav-item .nav-link {
+    color: #ededed;
+    padding: 10px 15px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  
+  .navbar-nav .nav-item .nav-link:hover {
+    background-color: #a397a7; 
+    color: #333; 
+  }
+  
+  
+  .navbar-nav .nav-item .nav-link.active, 
+  .navbar-nav .nav-item .nav-link:focus {
+    background-color: #d1dce6; 
+    color: #333;
+    outline: none;
+  }
+  
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ededed;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.submit-recipe-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #99b4c2;
+}
+
+form label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: bold;
+}
+
+form input, form select, form textarea, form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+form button {
+    background-color: #99b4c2;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #a397a7;
+}

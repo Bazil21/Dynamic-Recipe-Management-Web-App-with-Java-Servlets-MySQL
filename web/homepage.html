@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tastify</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="homepageStyle.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg" style="background-color: #99b4c2;">
+      <div class="container-fluid">
+        <a>
+          <img src="logo.png" alt="Tastify Logo" class="logo" style="max-width: 150px; height: auto;">
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navLinks"
+          aria-controls="navLinks"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navLinks">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="homepage.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="categories.html">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="submitRecipe.html">Submit Recipe</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="favorites.html">Favorites</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="logout">Logout</a>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  
+
+
+  <main>
+    <section class="banner text-center py-5">
+      <h1>Everyday Delights: Easy & Tasty Recipes</h1>
+    </section>
+
+    <section class="recipe-sections container">
+      <div class="row text-center">
+        <div class="col-md-3">
+          <div class="recipe">
+            <div class="image-wrapper">
+              <img src="breakfast.jpg" alt="Breakfast" class="img-fluid">
+            </div>
+            <div class="box-content p-2">
+              <h5>Breakfast</h5>
+              <button class="btn btn-primary" onclick="navigateToCategory('breakfast')">View Recipes</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="recipe">
+            <div class="image-wrapper">
+              <img src="lunch.jpg" alt="Lunch" class="img-fluid">
+            </div>
+            <div class="box-content p-2">
+              <h5>Lunch</h5>
+              <button class="btn btn-primary" onclick="navigateToCategory('lunch')">View Recipes</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="recipe">
+            <div class="image-wrapper">
+              <img src="dinner.jpg" alt="Dinner" class="img-fluid">
+            </div>
+            <div class="box-content p-2">
+              <h5>Dinner</h5>
+              <button class="btn btn-primary" onclick="navigateToCategory('dinner')">View Recipes</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="recipe">
+            <div class="image-wrapper">
+              <img src="dessert.jpg" alt="Dessert" class="img-fluid">
+            </div>
+            <div class="box-content p-2">
+              <h5>Dessert</h5>
+              <button class="btn btn-primary" onclick="navigateToCategory('dessert')">View Recipes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="popular-searches container mt-5">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="mb-3">Search For Your Cravings</h2>
+          
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search for recipes...">
+            <button class="btn btn-primary" type="button" onclick="performSearch()">Search</button>
+          </div>
+    
+          <div class="d-flex flex-wrap gap-3">
+            <button class="btn btn-warning" onclick="navigateToType('chicken')">Chicken</button>
+            <button class="btn btn-warning" onclick="navigateToType('seafood')">Seafood</button>
+            <button class="btn btn-warning" onclick="navigateToType('meat')">Meat</button>
+            <button class="btn btn-warning" onclick="navigateToType('vegetarian')">Vegetarian</button>
+            <button class="btn btn-warning" onclick="navigateToType('cookies')">Cookies</button>
+            <button class="btn btn-warning" onclick="navigateToType('pasta')">Pasta</button>
+            <button class="btn btn-warning" onclick="navigateToType('salad')">Salad</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
+    <section class="popular container mt-5">
+      <h2 class="mb-4">Popular Recipes</h2>
+      <div class="row">
+      </div>
+    </section>
+  </main>
+
+  <footer class="mt-5 py-3 text-center" style="background-color: #d0ccb0;">
+    <p>© 2024 Tastify. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const isLoggedIn = localStorage.getItem('isLoggedIn') == 'true';
+  console.log("isLoggedIn", isLoggedIn);
+  
+  const submitRecipeLink = document.querySelector('a[href="submitRecipe.html"]');
+  const logout = document.querySelector('a[id="logout"]');
+  const login = document.querySelector('a[href="login.html"]');
+
+
+
+  if (!isLoggedIn) {
+    submitRecipeLink.style.display = 'none';
+    logout.style.display = 'none';
+
+  } else {
+    const username = localStorage.getItem('username') || 'User';
+    console.log(`Welcome, ${username}!`); 
+    login.style.display = 'none';
+
+  }
+
+  document.querySelector('#logout').addEventListener('click', () => {
+  localStorage.removeItem('isLoggedIn');
+  localStorage.removeItem('username'); // Clear stored user info
+  localStorage.removeItem('user_id'); // Clear stored user info
+
+  alert('You have been logged out.');
+  window.location.href = 'homepage.html'; // Redirect to homepage
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const popularSection = document.querySelector('.popular .row');
+
+  // Fetch recipes from the backend
+  fetch('/api/getrecipes') // Adjust this URL based on your backend setup
+    .then((response) => response.json())
+    .then((data) => {
+      popularSection.innerHTML = ''; // Clear any placeholder content
+
+      if (data.length === 0) {
+        popularSection.innerHTML = '<p>No recipes available at the moment.</p>';
+        return;
+      }
+
+      data.forEach((recipe) => {
+        const recipeCard = `
+          <div class="col-md-6">
+            <div class="post-item d-flex">
+              <img src="${recipe.image || 'placeholder.jpg'}" class="img-fluid" style="max-width: 120px; margin-right: 15px;">
+              <div>
+                <small>${new Date(recipe.created_at).toDateString()}</small>
+                <h5>${recipe.title}</h5>
+                <p>${recipe.ingredients.split(',').slice(0, 5).join(', ')}...</p>
+                <button class="btn btn-secondary" >Check Out The Recipe</button>
+              </div>
+            </div>
+          </div>
+        `;
+        popularSection.innerHTML += recipeCard;
+      });
+    })
+    .catch((error) => {
+      console.error('Error fetching recipes:', error);
+      popularSection.innerHTML = '<p>Failed to load recipes. Please try again later.</p>';
+    });
+});
+
+// Function to handle "Check Out The Recipe" button click
+function viewRecipe(recipeId) {
+  window.location.href = `recipeDetail.html?id=${recipeId}`;
+}
+
+
+  </script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="homepageJS.js"></script>
+
+</body>
+</html>

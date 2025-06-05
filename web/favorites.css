@@ -1,0 +1,23 @@
+.navbar {
+    padding: 20px;
+  }
+  
+  .navbar-nav .nav-item .nav-link {
+    color: #ededed;
+    padding: 10px 15px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  
+  .navbar-nav .nav-item .nav-link:hover {
+    background-color: #a397a7; 
+    color: #333; 
+  }
+  
+  
+  .navbar-nav .nav-item .nav-link.active, 
+  .navbar-nav .nav-item .nav-link:focus {
+    background-color: #d1dce6; 
+    color: #333;
+    outline: none;
+  }

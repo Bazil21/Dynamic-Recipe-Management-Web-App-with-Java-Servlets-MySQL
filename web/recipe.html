@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="recipe-container">
+        <h1 id="recipe-title"></h1>
+        <img id="recipe-image" alt="Recipe Image" />
+        <h3>Category: <span id="recipe-category"></span></h3>
+        <h3>Ingredients:</h3>
+        <p id="recipe-ingredients"></p>
+        <h3>Instructions:</h3>
+        <p id="recipe-instructions"></p>
+    </div>
+
+    <script>
+        // Get the recipe ID from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const recipeId = urlParams.get('id');
+
+        if (recipeId) {
+            fetch(`/recipe-api?id=${recipeId}`)
+                .then(response => {
+                    // Check if the response is valid JSON
+                    if (!response.ok) {
+                        throw new Error(`Error: ${response.status} ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(recipe => {
+                    // Populate the HTML with recipe data
+                    document.getElementById('recipe-title').textContent = recipe.title;
+                    document.getElementById('recipe-category').textContent = recipe.category;
+                    document.getElementById('recipe-ingredients').textContent = recipe.ingredients;
+                    document.getElementById('recipe-instructions').textContent = recipe.instructions;
+                    document.getElementById('recipe-image').src = recipe.image;
+                })
+                .catch(error => {
+                    console.error('Failed to load the recipe:', error);
+                    alert('Failed to load the recipe. Please try again later.');
+                });
+        } else {
+            console.error('Recipe ID is missing in the URL.');
+        }
+
+    </script>
+</body>
+
+</html>

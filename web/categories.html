@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Index</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="CategoriesStyle.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg" style="background-color: #99b4c2;">
+      <div class="container-fluid">
+        <a>
+          <img src="logo.png" alt="Tastify Logo" class="logo" style="max-width: 150px; height: auto;">
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navLinks"
+          aria-controls="navLinks"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navLinks">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="homepage.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="categories.html">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="submitRecipe.html">Submit Recipe</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="favorites.html">Favorites</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container my-5">
+    <h1 class="text-center">Find Your Flavor</h1>
+    <p class="text-center">Filter recipes by category to find the perfect meal!</p>
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="accordion" id="filterAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="typeHeading">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#typeCollapse">
+                TYPE
+              </button>
+            </h2>
+            <div id="typeCollapse" class="accordion-collapse collapse show">
+              <div class="accordion-body">
+                <ul class="list-group">
+                  <li class="list-group-item category" data-category="all">All</li>
+                  <li class="list-group-item category" data-category="breakfast">Breakfast</li>
+                  <li class="list-group-item category" data-category="lunch">Lunch</li>
+                  <li class="list-group-item category" data-category="dinner">Dinner</li>
+                  <li class="list-group-item category" data-category="dessert">Dessert</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-dark mt-3 w-100" onclick="resetFilters()">RESET FILTERS</button>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <div class="row g-4" id="recipeCards">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get the category from the URL parameters (or default to 'all')
+    const urlParams = new URLSearchParams(window.location.search);
+    const category = urlParams.get('category') || 'all'; 
+  
+    // Function to fetch and display recipes by category
+    function fetchRecipes(category) {
+      fetch(`/api/recipes/category?category=${category}`)
+        .then(response => response.json())
+        .then(data => {
+          const recipeCards = document.getElementById('recipeCards');
+          recipeCards.innerHTML = ''; // Clear existing content
+          data.forEach(recipe => {
+            const cardHTML = `
+              <div class="col-md-4">
+                <div class="card">
+                  <img src="${recipe.image}" class="card-img-top" alt="${recipe.title}">
+                  <div class="card-body">
+                    <h5 class="card-title">${recipe.title}</h5>
+                    <!-- View Recipe Button, passing the recipe ID to recipe.html -->
+                    <button class="btn btn-primary" style="background-color: #99b4c2; color: white;" onclick="window.location.href='recipe.html?id=${recipe.id}'">View Recipe</button>
+                  </div>
+                </div>
+              </div>
+            `;
+            recipeCards.innerHTML += cardHTML;
+          });
+        })
+        .catch(error => console.error('Error fetching recipes:', error));
+    }
+  
+    // Fetch the recipes based on the category on page load
+    window.onload = () => fetchRecipes(category);
+  
+    // Reset the filters and go back to 'all' category
+    function resetFilters() {
+      window.location.href = 'categories.html?category=all';
+    }
+  
+    // Add event listeners to category buttons for filtering
+    document.querySelectorAll('.category').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const selectedCategory = e.target.dataset.category;
+        window.location.href = `categories.html?category=${selectedCategory}`;
+      });
+    });
+  </script>
+  
+
+  <footer class="mt-5 py-3 text-center" style="background-color: #d0ccb0;">
+    <p>© 2024 Tastify. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="categoriesJS.js"></script>
+</body>
+</html>

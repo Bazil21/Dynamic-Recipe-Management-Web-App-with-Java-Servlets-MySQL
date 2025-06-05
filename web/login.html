@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Login Page</title>
+   <link rel="stylesheet" href="login.css">
+</head>
+<body>
+   <header>
+       <h1 class="heading">Login/Signup</h1>
+   </header>
+
+   <div class="container">
+       <div class="slider"></div>
+       <div class="btn">
+           <button class="login">Login</button>
+           <button class="signup">Signup</button>
+       </div>
+
+       <div class="form-section">
+       <!-- Login form -->
+<form id="loginForm" class="login-box" action="/api/user" method="POST">
+    <input type="email" name="loginEmail" class="email ele" placeholder="youremail@email.com" required>
+    <input type="password" name="loginPassword" class="password ele" placeholder="password" required>
+    <input type="hidden" name="formType" value="login">
+    <button type="button" class="clkbtn" onclick="submitLogin()">Login</button>
+</form>
+
+<!-- Signup form -->
+<form id="signupForm" class="signup-box" action="/api/user" method="POST">
+    <input type="text" name="username" class="name ele" placeholder="Enter your name" required>
+    <input type="email" name="signupEmail" class="email ele" placeholder="youremail@email.com" required>
+    <input type="password" name="signupPassword" class="password ele" placeholder="password" required>
+    <input type="password" name="confirmSignupPassword" class="password ele" placeholder="Confirm password" required>
+    <input type="hidden" name="formType" value="signup">
+    <button type="button" class="clkbtn" onclick="submitSignup()">SignUp</button>
+</form>
+
+       </div>
+   </div>
+   <script>
+function submitLogin() {
+    const form = document.getElementById("loginForm");
+
+    const formData = new URLSearchParams(new FormData(form));
+fetch("/api/user", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: formData.toString(),
+})
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                alert(data.message);
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('username', data.username || 'Guest'); 
+            localStorage.setItem('user_id', data.userId || '' ); 
+
+                window.location.href = data.redirect;
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch((error) => console.error("Error:", error));
+}
+
+function submitSignup() {
+    const form = document.getElementById("signupForm");
+    const password = form["signupPassword"].value;
+    const confirmPassword = form["confirmSignupPassword"].value;
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+    }
+
+
+    const formData = new URLSearchParams(new FormData(form));
+fetch("/api/user", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: formData.toString(),
+})
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                alert(data.message);
+                window.location.href = data.redirect;
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch((error) => console.error("Error:", error));
+}
+
+
+   </script>
+   <script src="login.js"></script>
+</body>
+</html>

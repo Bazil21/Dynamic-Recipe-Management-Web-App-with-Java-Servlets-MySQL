@@ -1,0 +1,155 @@
+/* Navbar styles */
+.navbar {
+  padding: 20px;
+}
+
+.navbar-nav .nav-item .nav-link {
+  color: #ededed;
+  padding: 10px 15px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+  background-color: #a397a7;
+  color: #333;
+}
+
+.navbar-nav .nav-item .nav-link.active, 
+.navbar-nav .nav-item .nav-link:focus {
+  background-color: #d1dce6;
+  color: #333;
+  outline: none;
+}
+
+/* Recipe section styles */
+.recipe {
+  background-color: #d1dce6;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.image-wrapper img {
+  object-fit: cover;
+  width: 100%;
+  height: 150px;
+  border-radius: 8px;
+}
+
+.recipe h5 {
+  margin-top: 10px;
+  color: #333;
+}
+
+.recipe button {
+  background-color: #99b4c2;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.recipe button:hover {
+  background-color: #a397a7;
+}
+
+/* Popular recipes section */
+.popular-recipes {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.popular-recipes h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.post-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.post-item img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.post-item h5 {
+  font-size: 1.2rem;
+  margin: 5px 0;
+  color: #333;
+}
+
+.post-item p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.post-item button {
+  background-color: #99b4c2;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.post-item button:hover {
+  background-color: #a397a7;
+}
+
+/* Search bar and type buttons */
+.input-group .btn-primary {
+  background-color: #99b4c2;
+  border: none;
+  color: #ffffff;
+  transition: background-color 0.3s;
+}
+
+.input-group .btn-primary:hover {
+  background-color: #a397a7;
+  color: #ffffff;
+}
+
+.popular-searches .btn-warning {
+  background-color: #d0ccb0;
+  color: #333;
+  border: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.popular-searches .btn-warning:hover {
+  background-color: #a397a7;
+  color: #ffffff;
+}
+
+/* Footer styles */
+footer {
+  background-color: #d0ccb0;
+  color: #333;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+footer p {
+  margin: 0;
+}
